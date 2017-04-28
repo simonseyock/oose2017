@@ -1,0 +1,14 @@
+a)
+Zeile a entspricht: erhöhe k um 1, gebe k aus
+Zeile b entspricht: gebe k aus
+Zeile c entspricht: gebe k aus, erhöhe k um 1
+
+b)
+Um eine Gleitkommazahldivision zu erreichen muss eine der beiden Zahlen eine Gleitkommazahl sein.
+(Siehe Aufgabe3.java)
+
+c)
+Statt des Gleichheitsoperators (==) wurde der Zuweisungsoperator benutzt (=).
+Das Ergebnis des Zuweisungsoperators ist der Wert der Zuweisung.
+Also in diesem Fall 'false', statt 'true', was das Ergebnis von 'b == false' gewesen wäre.
+(Siehe Aufgabe3.java)
