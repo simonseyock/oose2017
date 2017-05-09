@@ -30,6 +30,15 @@ public class Sheep {
 //		return clone(false);
 //	}
 	
+	
+	public boolean equals(Object o){
+		if (o instanceof Sheep){
+			Sheep s = (Sheep)o;
+			return s.name.equals(name) && s.fur.equals(fur);
+		}
+		return false;
+	}
+	
 	public Sheep shallowclone() {
 		return new Sheep(name, fur);
 	}

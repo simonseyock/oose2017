@@ -12,4 +12,12 @@ public class Fur {
 	public Fur clone() {
 		return new Fur(length);
 	}
+	
+	public boolean equals(Object o){
+		if (o instanceof Fur){
+			Fur s = (Fur)o;
+			return s.length == length;
+		}
+		return false;
+	}
 }
