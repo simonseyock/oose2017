@@ -1,7 +1,6 @@
 public class Main {
 
 	public static void main(String[] args) {
-		// AUFGABE 2
 		 Food food;
 		 food = new Cauliflower();
 		 System.out.println(food.getMeal());
