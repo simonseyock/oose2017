@@ -1,3 +1,3 @@
 public interface Operator {
-	Object execute(Matrix m);
+	Object execute(Matrix2d m);
 }

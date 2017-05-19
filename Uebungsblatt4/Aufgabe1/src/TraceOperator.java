@@ -1,16 +1,11 @@
 
 public class TraceOperator implements Operator {
 
-	public Object execute(Matrix m) {
-		if (m.getRowCount() != m.getColCount()) {
-			throw new UnsupportedOperationException("TraceOperator can only handle quadratic matrices.");
-		}		
+	public Object execute(Matrix2d m) {
 		double result=0;
-		for (int i=0; i<m.getRowCount(); i++){
+		for (int i=0; i<m.getSize(); i++){
 			result += m.get(i,i);
 		}
 		return result;
 	}
-	
-
 }
