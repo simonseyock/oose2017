@@ -1,5 +1,5 @@
 
-public class PartialMultiplyThread implements Runnable {
+public class PartialMultiplyThread extends Thread {
 
 	private BigMatrix A;
 	private BigMatrix B;
@@ -8,7 +8,7 @@ public class PartialMultiplyThread implements Runnable {
 	
 	private BigMatrix result;
 	
-	public PartialMultiplyThread(BigMatrix a, BigMatrix b, int s, int e) {
+	PartialMultiplyThread(BigMatrix a, BigMatrix b, int s, int e) {
 		A = a;
 		B = b;
 		start = s;
@@ -20,14 +20,15 @@ public class PartialMultiplyThread implements Runnable {
 		int dim = A.getDimension();
 		
 		int startRow = start / dim;
-		int startCol = start % dim;
 		int endRow = end / dim;
-		int endCol = end % dim;
 		
 		result = new BigMatrix(dim);
-		
-		for (int i=startRow; i<endRow; i++) {
-			for (int j=startCol; j<endCol; j++) {
+
+		for (int i = startRow; i <= endRow; i++) {
+			int startCol = (i == startRow) ? start % dim : 0;
+			int endCol = (i == endRow) ? end % dim : dim;
+
+			for (int j = startCol; j < endCol; j++) {
 				double value = 0;
 				for (int k=0; k<dim; k++) {
 					value += A.get(i, k) * B.get(k, j);
@@ -37,7 +38,7 @@ public class PartialMultiplyThread implements Runnable {
 		}
 	}
 
-	public BigMatrix getResult()
+	BigMatrix getResult()
 	{
 		return result;
 	}
