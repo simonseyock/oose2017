@@ -8,7 +8,7 @@ public class BigMatrix {
 
     public BigMatrix(int dim) {
         if (dim < 1) {
-            // error
+            throw new IllegalArgumentException("Dimension needs to be bigger than 0.");
         }
         dimension = dim;
         values = new double[dim][];
@@ -39,7 +39,7 @@ public class BigMatrix {
 
     public BigMatrix add(BigMatrix ref) {
         if (dimension != ref.getDimension()) {
-            // error
+            throw new IllegalArgumentException("Matrices need to have the same dimension.");
         }
         BigMatrix result = new BigMatrix(dimension);
         for (int i = 0; i < dimension; i++) {
@@ -52,7 +52,7 @@ public class BigMatrix {
 
     public BigMatrix multiplyST(BigMatrix ref) {
         if (dimension != ref.getDimension()) {
-            // error
+            throw new IllegalArgumentException("Matrices need to have the same dimension.");
         }
         BigMatrix result = new BigMatrix(dimension);
         for (int i = 0; i < dimension; i++) {
@@ -75,15 +75,17 @@ public class BigMatrix {
         int maxThreads = Runtime.getRuntime().availableProcessors();
 
         int minMatrixElements = minMultiplicationsPerThread / dimension;
+        // calculation of every element of the matrix takes dimension times multiplications
 
         int threadAmount = Math.min(maxThreads, dimension * dimension / minMatrixElements);
 
-        int actualElementsPerThread = (int) Math.ceil((double) dimension * dimension / threadAmount);
+        int elements = (int) Math.ceil((double) dimension * dimension / threadAmount);
 
         PartialMultiplyThread[] threads = new PartialMultiplyThread[threadAmount];
 
         for (int i = 0; i < threadAmount; i++) {
-            threads[i] = new PartialMultiplyThread(this, ref, i * actualElementsPerThread, Math.min((i + 1) * actualElementsPerThread, dimension * dimension));
+            threads[i] = new PartialMultiplyThread(this, ref,
+                    i * elements, Math.min((i + 1) * elements, dimension * dimension));
             threads[i].start();
         }
 
